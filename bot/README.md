@@ -19,3 +19,5 @@ See https://github.com/RLBot/RLBotPythonExample/wiki for documentation and tutor
 ## Running a match
 
 You can start a match by running `run.py`, the match config for it is in `rlbot.cfg`
+
+N.B You may need to run `pip3 install eel` in the src folder from a terminal to be able to debug the rlbot gui from here but DO NOT add it to the requirements.txt as the bot does not need it to run.
