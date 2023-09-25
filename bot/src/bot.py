@@ -5,7 +5,9 @@ import numpy as np
 
 from action.default_act import DefaultAction
 from agent import Agent
-from obs.default_obs import DefaultObs
+
+# from obs.default_obs import DefaultObs
+from rlgym.utils.obs_builders import AdvancedObs
 from rlgym_compat import GameState
 
 
@@ -15,7 +17,7 @@ class Sarpy(BaseAgent):
 
         # FIXME Hey, botmaker. Start here:
         # Swap the obs builder if you are using a different one, RLGym's AdvancedObs is also available
-        self.obs_builder = DefaultObs()
+        self.obs_builder = AdvancedObs()
         # Swap the action parser if you are using a different one, RLGym's Discrete and Continuous are also available
         self.act_parser = DefaultAction()
         # Your neural network logic goes inside the Agent class, go take a look inside src/agent.py
