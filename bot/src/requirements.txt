@@ -2,7 +2,7 @@
 # You will automatically get updates for all versions starting with "1.".
 rlbot==1.*
 --find-links https://download.pytorch.org/whl/torch_stable.html
-torch==2.0.1+cu117
+torch==1.9.1+cu111
 rlgym-compat>=1.1.0
 numpy
 
