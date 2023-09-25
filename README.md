@@ -2,9 +2,10 @@
 
 ## Prerequisites
 
-1. Install Visual C++ 14.0 or greater from https://visualstudio.microsoft.com/visual-cpp-build-tools/
-2. Run `pip install setuptools==65.5.0 pip==21` as gym 0.21 installation is broken with more recent versions
-3. You can now install the packages manually or using the requirements.txt file. To do the latter, run `pip3 install -r requirements.txt`
+1. Install Python version 3.9.0
+2. Install Visual C++ 14.0 or greater from https://visualstudio.microsoft.com/visual-cpp-build-tools/
+3. Run `pip install setuptools==65.5.0 pip==21` as gym 0.21 installation is broken with more recent versions
+4. You can now install the packages manually or using the requirements.txt file. To do the latter, run `pip3 install -r requirements.txt`
 
 ### Manual package installation
 
