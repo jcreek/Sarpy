@@ -9,7 +9,7 @@ from obs.default_obs import DefaultObs
 from rlgym_compat import GameState
 
 
-class RLGymExampleBot(BaseAgent):
+class Sarpy(BaseAgent):
     def __init__(self, name, team, index):
         super().__init__(name, team, index)
 
@@ -29,7 +29,7 @@ class RLGymExampleBot(BaseAgent):
         self.update_action = True
         self.ticks = 0
         self.prev_time = 0
-        print('RLGymExampleBot Ready - Index:', index)
+        print("Sarpy Ready - Index:", index)
 
     def initialize_agent(self):
         # Initialize the rlgym GameState object now that the game is active and the info is available
@@ -64,8 +64,16 @@ class RLGymExampleBot(BaseAgent):
                 self.game_state.players = [player]
             else:
                 # Sort by distance to ball
-                teammates.sort(key=lambda p: np.linalg.norm(self.game_state.ball.position - p.car_data.position))
-                opponents.sort(key=lambda p: np.linalg.norm(self.game_state.ball.position - p.car_data.position))
+                teammates.sort(
+                    key=lambda p: np.linalg.norm(
+                        self.game_state.ball.position - p.car_data.position
+                    )
+                )
+                opponents.sort(
+                    key=lambda p: np.linalg.norm(
+                        self.game_state.ball.position - p.car_data.position
+                    )
+                )
 
                 # Grab opponent in same "position" relative to it's teammates
                 opponent = opponents[min(teammates.index(player), len(opponents) - 1)]
@@ -73,7 +81,11 @@ class RLGymExampleBot(BaseAgent):
                 self.game_state.players = [player, opponent]
 
             obs = self.obs_builder.build_obs(player, self.game_state, self.action)
-            self.action = self.act_parser.parse_actions(self.agent.act(obs), self.game_state)[0]  # Dim is (N, 8)
+            self.action = self.act_parser.parse_actions(
+                self.agent.act(obs), self.game_state
+            )[
+                0
+            ]  # Dim is (N, 8)
 
         if self.ticks >= self.tick_skip - 1:
             self.update_controls(self.action)
