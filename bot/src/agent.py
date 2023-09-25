@@ -1,20 +1,17 @@
 import os
+from stable_baselines3 import PPO
+
+models_dir = "../../models/PPO-rl"
 
 
 class Agent:
     def __init__(self):
-        # If you need to load your model from a file this is the time to do it
-        # You can do something like:
-        #
-        # self.actor = # your Model
-        #
-        # cur_dir = os.path.dirname(os.path.realpath(__file__))
-        # with open(os.path.join(cur_dir, 'model.p'), 'rb') as file:
-        #     model = pickle.load(file)
-        # self.actor.load_state_dict(model)
-        pass
+        # Get the directory of agent.py
+        script_dir = os.path.dirname(os.path.realpath(__file__))
 
-    def act(self, state):
-        # Evaluate your model here
-        action = [1, 0, 0, 0, 0, 0, 0, 0]
-        return action
+        model_path = os.path.join(script_dir, "../../models/PPO-rl/280000.zip")
+        self.model = PPO.load(model_path)
+
+    def act(self, obs):
+        action, _ = self.model.predict(obs)
+        return action.tolist()
