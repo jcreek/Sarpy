@@ -20,3 +20,11 @@ You will likely see errors during installations here. Largely these should be ig
 `tensorboard --logdir=logs` in a new terminal to load the web UI to track agent training.
 
 `pip3 freeze > requirements.txt` to save current packages installed into an updated requirements.txt file.
+
+## Training
+
+Run the python file rl-training.py
+
+## Using the bot
+
+Within the bot folder, run the python file run_gui.py
