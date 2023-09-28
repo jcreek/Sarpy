@@ -1,7 +1,7 @@
 import os
 from stable_baselines3 import PPO
 
-model_zip = "PPO-rl2/280000.zip"
+model_zip = "exit_save.zip"
 
 
 class Agent:
