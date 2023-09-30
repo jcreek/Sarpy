@@ -54,7 +54,7 @@ if __name__ == "__main__":  # Required for multiprocessing
     fps = 120 / frame_skip
     gamma = np.exp(np.log(0.5) / (fps * half_life_seconds))  # Quick mafs
     agents_per_match = 2
-    num_instances = 4
+    num_instances = 10
     target_steps = 100_000
     steps = target_steps // (num_instances * agents_per_match)
     batch_size = steps
@@ -109,6 +109,7 @@ if __name__ == "__main__":  # Required for multiprocessing
             env,
             device="auto",  # Need to set device again (if using a specific one)
         )
+        print("Loaded exit_save.zip model")
     except:
         model = PPO(
             MlpPolicy,
@@ -124,6 +125,7 @@ if __name__ == "__main__":  # Required for multiprocessing
             verbose=3,  # Print out all the info as we're going
             device="auto",  # Uses GPU if available
         )
+        print("Created new model")
 
     # Save model every so often
     # Divide by num_envs (number of agents) because callback only increments every time all agents have taken a step
@@ -136,8 +138,10 @@ if __name__ == "__main__":  # Required for multiprocessing
 
     try:
         while True:
+            print("Learning...")
             model.learn(25_000_000, callback=callback)
             model.save(f"{models_dir}/exit_save")
+            print("Saved exit_save model")
             model.save(f"mmr_models/{model.num_timesteps}")
     except Exception as e:
         print(e)
