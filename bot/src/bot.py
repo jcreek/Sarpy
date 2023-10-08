@@ -11,6 +11,8 @@ from rlgym.utils.obs_builders import AdvancedObs
 from rlgym_compat import GameState
 from rlgym.utils.action_parsers import DiscreteAction
 
+from rlgym_tools.extra_obs.advanced_padder import AdvancedObsPadder
+
 
 class Sarpy(BaseAgent):
     def __init__(self, name, team, index):
@@ -18,7 +20,7 @@ class Sarpy(BaseAgent):
 
         # FIXME Hey, botmaker. Start here:
         # Swap the obs builder if you are using a different one, RLGym's AdvancedObs is also available
-        self.obs_builder = AdvancedObs()
+        self.obs_builder = AdvancedObsPadder(team_size=3)
         # Swap the action parser if you are using a different one, RLGym's Discrete and Continuous are also available
         self.act_parser = DiscreteAction()
         # Your neural network logic goes inside the Agent class, go take a look inside src/agent.py
@@ -59,33 +61,10 @@ class Sarpy(BaseAgent):
             # By default we treat every match as a 1v1 against a fixed opponent,
             # by doing this your bot can participate in 2v2 or 3v3 matches. Feel free to change this
             player = self.game_state.players[self.index]
-            teammates = [p for p in self.game_state.players if p.team_num == self.team]
-            opponents = [p for p in self.game_state.players if p.team_num != self.team]
-
-            if len(opponents) == 0:
-                # There's no opponent, we assume this model is 1v0
-                self.game_state.players = [player]
-            else:
-                # Sort by distance to ball
-                teammates.sort(
-                    key=lambda p: np.linalg.norm(
-                        self.game_state.ball.position - p.car_data.position
-                    )
-                )
-                opponents.sort(
-                    key=lambda p: np.linalg.norm(
-                        self.game_state.ball.position - p.car_data.position
-                    )
-                )
-
-                # Grab opponent in same "position" relative to it's teammates
-                opponent = opponents[min(teammates.index(player), len(opponents) - 1)]
-
-                self.game_state.players = [player, opponent]
 
             obs = self.obs_builder.build_obs(player, self.game_state, self.action)
             self.action = self.act_parser.parse_actions(
-                self.agent.act(obs), self.game_state
+                np.array(self.agent.act(obs)), self.game_state
             )[
                 0
             ]  # Dim is (N, 8)
