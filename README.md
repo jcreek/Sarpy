@@ -17,7 +17,7 @@ You will likely see errors during installations here. Largely these should be ig
 
 ## Other useful commands
 
-`tensorboard --logdir=logs` in a new terminal to load the web UI to track agent training.
+`tensorboard --logdir=out/logs --bind_all` in a new terminal to load the web UI to track agent training. `--bind_all` is optional and exposes it on the network so you can monitor it from another device.
 
 `pip3 freeze > requirements.txt` to save current packages installed into an updated requirements.txt file.
 
