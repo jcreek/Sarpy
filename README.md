@@ -28,3 +28,50 @@ Run the python file rl-training.py
 ## Using the bot
 
 Within the bot folder, run the python file run_gui.py
+
+## Training plan
+
+This bot is configured to be able to play any Rocket League game mode. The plan for training it is as below. This will be done by playing games in as many instances of Rocket League simultaneously as possible.
+
+### Stage 1 (in progress)
+
+Learn the basic mechanics as fast as possible. To do this I'm using 3v3, so that there are 6 agents training for each instance of the game. This will make the logs noisier, but should give the bot more exposure to the basics of the game. 
+
+Reward functions at this point are as below, along with their scale:
+
+- VelocityPlayerToBallReward - 0.1
+- VelocityBallToGoalReward - 1
+- LiuDistanceBallToGoalReward - 1 
+- EventReward - 1
+    - team_goal=100.0,
+    - concede=-100.0,
+    - shot=5.0,
+    - save=30.0,
+    - demo=10.0,
+- BallYCoordinateReward - 0.1
+- RewardIfClosestToBall - 0.2 
+- LiuDistancePlayerToBallReward - 0.1 
+- FaceBallReward - 0.2 
+- TouchBallReward - 1
+- AlignBallGoal - 0.1
+- KickoffReward - 10
+
+The primary goal is to get the model to learn to kickoff, and generally aim to be ball chasing, with a plan to get the ball into the opposing goal.
+
+### Stage 2
+
+Learn the strategies for playing each game mode. To do this I will make the bot train in each game mode in series, or possibly in parallel if I can configure it to run different game modes in different instances of Rocket League. 
+
+Reward functions?
+
+### Stage 3
+
+Learn more advanced mechanics.
+
+### Stage 4
+
+Test it. 
+
+### Stage 5
+
+Test it in a bot tournament.
