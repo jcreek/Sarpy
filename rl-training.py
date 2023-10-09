@@ -87,11 +87,11 @@ if __name__ == "__main__":  # Required for multiprocessing
                     AlignBallGoal(),
                     KickoffReward(),
                 ),
-                (0.1, 1.0, 1.0, 1.0, 0.1, 0.2, 0.1, 0.2, 1.0, 0.1, 10.0),
+                (1.0, 1.0, 50.0, 1.0, 0.1, 0.2, 0.1, 0.2, 10.0, 0.1, 10.0),
             ),
             spawn_opponents=True,
             terminal_conditions=[
-                TimeoutCondition(fps * 30),
+                TimeoutCondition(fps * 300),
                 NoTouchTimeoutCondition(fps * 10),
                 GoalScoredCondition(),
             ],

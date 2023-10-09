@@ -58,6 +58,22 @@ Reward functions at this point are as below, along with their scale:
 
 The primary goal is to get the model to learn to kickoff, and generally aim to be ball chasing, with a plan to get the ball into the opposing goal.
 
+Terminal conditions for the first 265million steps: 
+
+- TimeoutCondition(fps * 30)
+- NoTouchTimeoutCondition(fps * 10)
+- GoalScoredCondition()
+
+After 265 million steps I changed the terminal conditions and reward weightings. 
+
+- TimeoutCondition -> fps * 300
+
+- VelocityPlayerToBallReward -> 1
+- TouchBallReward -> 10
+- LiuDistanceBallToGoalReward -> 50
+
+This is to try to get the bot to gain experience in other areas of the game now it has vaguely got the hang of what a kickoff is.
+
 ### Stage 2
 
 Learn the strategies for playing each game mode. To do this I will make the bot train in each game mode in series, or possibly in parallel if I can configure it to run different game modes in different instances of Rocket League. 
