@@ -37,6 +37,8 @@ This bot is configured to be able to play any Rocket League game mode. The plan 
 
 Learn the basic mechanics as fast as possible. To do this I'm using 3v3, so that there are 6 agents training for each instance of the game. This will make the logs noisier, but should give the bot more exposure to the basics of the game. 
 
+#### 0 steps
+
 Reward functions at this point are as below, along with their scale:
 
 - VelocityPlayerToBallReward - 0.1
@@ -64,6 +66,8 @@ Terminal conditions for the first 265million steps:
 - NoTouchTimeoutCondition(fps * 10)
 - GoalScoredCondition()
 
+#### ~250 million steps
+
 After 265 million steps I changed the terminal conditions and reward weightings. 
 
 - TimeoutCondition -> fps * 300
@@ -73,6 +77,20 @@ After 265 million steps I changed the terminal conditions and reward weightings.
 - LiuDistanceBallToGoalReward -> 50
 
 This is to try to get the bot to gain experience in other areas of the game now it has vaguely got the hang of what a kickoff is.
+
+#### ~500 million steps
+
+After 528 million steps I changed things again, switching to 1v1 instead of 3v3, and changing the rewards as below: 
+
+- VelocityBallToGoalReward -> 10
+- EventReward -> 10
+- RewardIfClosestToBall -> 1
+- LiuDistancePlayerToBallReward -> 1
+- AlignBallGoal -> 20
+
+#### ~1 billion steps
+
+The bot should now have acceptable mechanics and a vague understanding of 1v1 strategies.
 
 ### Stage 2
 
