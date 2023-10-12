@@ -61,7 +61,7 @@ if __name__ == "__main__":  # Required for multiprocessing
     def exit_save(model):
         model.save("models/exit_save")
 
-    team_size = 1
+    team_size = 3
 
     def get_match():  # Need to use a function so that each instance can call it and produce their own objects
         return Match(
@@ -87,7 +87,7 @@ if __name__ == "__main__":  # Required for multiprocessing
                     AlignBallGoal(),
                     KickoffReward(),
                 ),
-                (1.0, 10.0, 50.0, 10.0, 0.1, 1.0, 1.0, 0.2, 10.0, 20.0, 10.0),
+                (50.0, 10.0, 20.0, 10.0, 0.1, 10.0, 1.0, 0.2, 10.0, 20.0, 10.0),
             ),
             spawn_opponents=True,
             terminal_conditions=[

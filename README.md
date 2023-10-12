@@ -80,7 +80,7 @@ This is to try to get the bot to gain experience in other areas of the game now 
 
 #### ~500 million steps
 
-After 528 million steps I changed things again, switching to 1v1 instead of 3v3, and changing the rewards as below: 
+After 528 million steps I changed things again, changing the rewards as below: 
 
 - VelocityBallToGoalReward -> 10
 - EventReward -> 10
@@ -90,7 +90,13 @@ After 528 million steps I changed things again, switching to 1v1 instead of 3v3,
 
 #### ~1 billion steps
 
-The bot should now have acceptable mechanics and a vague understanding of 1v1 strategies.
+The bot should now have acceptable mechanics and a vague understanding of 3v3 strategies.
+
+However, I noticed that there's a lot of dead time, where it's not necessarily driving towards the ball or preparing to defend or receive a pass, so I changed things again, changing the rewards as below: 
+
+- VelocityPlayerToBallReward -> 50
+- LiuDistanceBallToGoalReward -> 20
+- RewardIfClosestToBall -> 10
 
 ### Stage 2
 
