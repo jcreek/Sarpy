@@ -20,6 +20,7 @@ from rlgym.utils.reward_functions.common_rewards import (
     FaceBallReward,
     TouchBallReward,
     AlignBallGoal,
+    SaveBoostReward,
 )
 from rlgym.utils.obs_builders import AdvancedObs
 from rlgym.utils.state_setters import DefaultState
@@ -71,24 +72,40 @@ if __name__ == "__main__":  # Required for multiprocessing
                 (
                     VelocityPlayerToBallReward(),
                     VelocityBallToGoalReward(),
-                    LiuDistanceBallToGoalReward(),
                     EventReward(
-                        team_goal=100.0,
+                        team_goal=1000.0,
                         concede=-100.0,
-                        shot=5.0,
-                        save=30.0,
-                        demo=10.0,
+                        shot=10.0,
+                        save=60.0,
+                        demo=20.0,
                     ),
-                    BallYCoordinateReward(),
-                    RewardIfClosestToBall(LiuDistancePlayerToBallReward()),
-                    LiuDistancePlayerToBallReward(),
-                    FaceBallReward(),
-                    TouchBallReward(),
-                    AlignBallGoal(),
                     KickoffReward(),
+                    SaveBoostReward(),
                 ),
-                (50.0, 10.0, 20.0, 10.0, 0.1, 10.0, 1.0, 0.2, 10.0, 20.0, 10.0),
+                (1.0, 1.0, 1.0, 1.0, 1.0),
             ),
+            # reward_function=CombinedReward(
+            #     (
+            #         VelocityPlayerToBallReward(),
+            #         VelocityBallToGoalReward(),
+            #         LiuDistanceBallToGoalReward(),
+            #         EventReward(
+            #             team_goal=10000.0,
+            #             concede=-10000.0,
+            #             shot=10.0,
+            #             save=60.0,
+            #             demo=20.0,
+            #         ),
+            #         BallYCoordinateReward(),
+            #         RewardIfClosestToBall(LiuDistancePlayerToBallReward()),
+            #         LiuDistancePlayerToBallReward(),
+            #         FaceBallReward(),
+            #         TouchBallReward(),
+            #         AlignBallGoal(),
+            #         KickoffReward(),
+            #     ),
+            #     (50.0, 10.0, 20.0, 100.0, 0.1, 10.0, 1.0, 0.2, 10.0, 20.0, 10.0),
+            # ),
             spawn_opponents=True,
             terminal_conditions=[
                 TimeoutCondition(fps * 300),
@@ -104,8 +121,8 @@ if __name__ == "__main__":  # Required for multiprocessing
 
     # Generate the environment (the Rocket League game used by RL Gym)
     env = SB3MultipleInstanceEnv(
-        get_match, 10
-    )  # Start 10 instances, waiting 60 seconds between each
+        get_match, 14
+    )  # Start 14 instances, waiting 30 seconds between each
     env = VecCheckNan(env)  # Optional
     env = VecMonitor(env)  # Recommended, logs mean reward and ep_len to Tensorboard
     env = VecNormalize(

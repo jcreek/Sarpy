@@ -98,6 +98,34 @@ However, I noticed that there's a lot of dead time, where it's not necessarily d
 - LiuDistanceBallToGoalReward -> 20
 - RewardIfClosestToBall -> 10
 
+#### ~1.5 billion steps
+
+The bot can hold its own against the Psyonix Rookie bot, but only just beats it. Its fundamental weakness seems to be that it ignores actually scoring goals in favour of doing other things. On inspection, the scaling for rewards for goals is well behind everything else, so the rewards are changed as below: 
+
+- EventReward -> 1000
+    - team_goal -> 10000
+    - concede -> -10000
+    - shot -> 10
+    - save -> 60
+    - demo -> 20
+
+#### ~1.75 billion steps
+
+The bot is now worse, mostly just sitting around in the middle of the pitch and moving very slowly. Given it has learned basic mechanics, I'm trying totally changing the rewards at this point, so the new rewards are as below, and are all equally weighted: 
+
+- VelocityPlayerToBallReward
+- VelocityBallToGoalReward
+- EventReward
+    - team_goal=1000.0
+    - concede=-100.0
+    - shot=10.0
+    - save=60.0
+    - demo=20.0
+- KickoffReward
+- SaveBoostReward
+
+My hope is that this encourages the bot to move faster, pick up more boost, and prioritise hitting the ball quickly towards the enemy goal.
+
 ### Stage 2
 
 Learn the strategies for playing each game mode. To do this I will make the bot train in each game mode in series, or possibly in parallel if I can configure it to run different game modes in different instances of Rocket League. 
