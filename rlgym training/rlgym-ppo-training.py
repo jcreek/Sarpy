@@ -179,5 +179,6 @@ if __name__ == "__main__":
         ),
         timestep_limit=1_000_000_000,
         log_to_wandb=True,
+        n_checkpoints_to_keep=10_000,
     )
     learner.learn()
