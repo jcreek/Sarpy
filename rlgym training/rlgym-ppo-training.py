@@ -42,7 +42,9 @@ def build_rocketsim_env():
         GoalScoredCondition,
     )
     from rlgym_sim.utils import common_values
-    from rlgym_sim.utils.action_parsers import ContinuousAction
+
+    # from rlgym_sim.utils.action_parsers import ContinuousAction
+    from rlgym_tools.extra_action_parsers.lookup_act import LookupAction
     from rlgym_tools.extra_obs.advanced_padder import AdvancedObsPadder
 
     spawn_opponents = True
@@ -52,7 +54,7 @@ def build_rocketsim_env():
     timeout_seconds = 10
     timeout_ticks = int(round(timeout_seconds * game_tick_rate / tick_skip))
 
-    action_parser = ContinuousAction()
+    action_parser = LookupAction()
     terminal_conditions = [
         NoTouchTimeoutCondition(timeout_ticks),
         GoalScoredCondition(),
@@ -177,7 +179,7 @@ if __name__ == "__main__":
             if checkpoint_load_folder != ""
             else {}
         ),
-        timestep_limit=1_000_000_000,
+        timestep_limit=100_000_000_000,
         log_to_wandb=True,
         n_checkpoints_to_keep=10_000,
     )

@@ -72,6 +72,6 @@ class Agent:
 
     def act(self, obs):
         action, logprob = self.policy.get_action(obs, deterministic=False)
-        action = self.actor.eval(obs)
+        # action = self.policy.eval(obs)
         # action, _ = self.model.predict(obs)
         return action.tolist()

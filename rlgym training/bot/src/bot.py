@@ -9,7 +9,9 @@ from agent import Agent
 # from obs.default_obs import DefaultObs
 from rlgym.utils.obs_builders import AdvancedObs
 from rlgym_compat import GameState
-from rlgym.utils.action_parsers import ContinuousAction
+
+# from rlgym.utils.action_parsers import ContinuousAction
+from rlgym_tools.extra_action_parsers.lookup_act import LookupAction
 
 from rlgym_tools.extra_obs.advanced_padder import AdvancedObsPadder
 
@@ -20,9 +22,9 @@ class Sarpy(BaseAgent):
 
         # FIXME Hey, botmaker. Start here:
         # Swap the obs builder if you are using a different one, RLGym's AdvancedObs is also available
-        self.obs_builder = AdvancedObsPadder(team_size=3)
+        self.obs_builder = AdvancedObsPadder(team_size=1)
         # Swap the action parser if you are using a different one, RLGym's Discrete and Continuous are also available
-        self.act_parser = ContinuousAction()
+        self.act_parser = LookupAction()
         # Your neural network logic goes inside the Agent class, go take a look inside src/agent.py
         self.agent = Agent()
         # Adjust the tickskip if your agent was trained with a different value
