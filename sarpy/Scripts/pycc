@@ -1,0 +1,3 @@
+#!c:\users\jcreek\documents\github\sarpy\sarpy\scripts\python.exe
+from numba.pycc import main
+main()
